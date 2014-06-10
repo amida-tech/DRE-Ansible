@@ -1,0 +1,10 @@
+---
+#file: roles/common/tasks/main.yml
+
+- name: Test Connection
+  ping:
+  remote_user: yourname
+
+- name: Run System Updates
+  yum: name="*" state="latest"
+  sudo: yes
