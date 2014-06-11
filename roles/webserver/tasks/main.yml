@@ -7,6 +7,9 @@
   with_items:
     - git
 
+- name: Make node user.
+  user: name=node group=node system=yes state=present
+
 - name: Make DRE Folder
   command: mkdir -p "/home/ec2-user/dre"
 
@@ -27,3 +30,19 @@
   with_items:
     - nodejs
     - npm
+
+- name:  Install grunt CLI tools.
+  sudo: yes
+  command: npm install -g grunt-cli
+
+- name:  Install dre client dependencies
+  command: npm install chdir=/home/ec2-user/dre/client
+
+- name:  Install dre server dependencies
+  command: npm install chdir=/home/ec2-user/dre/server
+
+- name:  Run client build
+  command: grunt chdir=/home/ec2-user/dre/client
+
+
+

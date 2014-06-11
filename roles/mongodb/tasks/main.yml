@@ -1,18 +1,11 @@
 ---
-#file: roles/dbserver/tasks/main.yml
-
-- name: Remove mongod user if present
-  user: name=mongod state=absent remove=yes
+#file: roles/mongodb/tasks/main.yml
 
 - name: Create the mongod group
   group: name=mongod system=yes
 
 - name: Create the mongod user
   user: name=mongod group=mongod comment="MongoD" append=yes
-  sudo: yes
-
-- name: Create the data directory
-  file: path={{mongodb_datadir_prefix}} owner=mongod group=mongod state=directory
   sudo: yes
 
 - name: Install 10gen yum repo
@@ -24,3 +17,7 @@
   sudo: yes
   with_items:
     - mongodb-org
+
+- name: Start Mongodb Service
+  sudo: yes
+  service: name=mongod state="started" enabled=yes
