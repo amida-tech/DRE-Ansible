@@ -13,7 +13,7 @@
 - name: Clone DRE Repository
   git: repo="git://github.com/amida-tech/DRE.git" dest="/home/ec2-user/dre"
 
-- name: Add Extended Fedora Repository
+- name: Add Extended Fedora Repo Public Key
   command: rpm --import https://fedoraproject.org/static/0608B895.txt
   sudo: yes
 
